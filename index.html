@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cocktail-Craft</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- Altersabfrage -->
+  <div id="ageCheck" class="popup">
+    <div class="popup-content">
+      <h2>🔞 Are you 18 or older?</h2>
+      <button id="yesButton">Yes</button>
+      <button id="noButton">No</button>
+    </div>
+  </div>
+
+  <!-- Sidebar -->
+  <div id="sidebar" class="sidebar">
+    <div class="sidebar-content">
+      <h2>Filter</h2>
+      <div class="filter-group">
+        <label for="alcoholFilter">Alcohol Content:</label>
+        <select id="alcoholFilter">
+          <option value="" disabled selected>Select an option</option>
+          <option value="Alcoholic">Alcoholic</option>
+          <option value="Non alcoholic">Non-Alcoholic</option>
+          <option value="All">All</option>
+
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <label for="categoryFilter">Category:</label>
+        <select id="categoryFilter">
+          <option value="" disabled selected>Select an option</option>
+          <option value="Cocktail">Cocktail</option>
+          <option value="Shot">Shot</option>
+          <option value="Soft Drink">Soft Drink</option>
+          <option value="Ordinary Drink">Ordinary Drink</option>
+          <option value="Punch / Party Drink">Punch / Party Drink</option>
+          <option value="All">All</option>
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <label for="glassFilter">Glass Type:</label>
+        <select id="glassFilter">
+          <option value="" disabled selected>Select an option</option>
+          <option value="Cocktail glass">Cocktail glass</option>
+          <option value="Shot glass">Shot glass</option>
+          <option value="Champagne flute">Champagne flute</option>
+          <option value="Highball glass">Highball glass</option>
+          <option value="Wine Glass">Wine Glass</option>
+          <option value="Margarita glass">Margarita glass</option>
+          <option value="All">All</option>
+        </select>
+      </div>
+
+      <button id="applyFilters">Apply Filter</button>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="main-header">
+    <div class="header-content">
+      <img src="../material/logo.png" alt="CocktailCraft Logo" class="header-logo" />
+    </div>
+  </header>
+
+  <!-- Loading Screen -->
+  <div id="loadingScreen" class="loading-screen">
+    <div class="loading-content">
+      <div class="loading-spinner"></div>
+      <p class="loading-text">Loading our cocktail collection...</p>
+    </div>
+  </div>
+
+  <!-- Custom Alert -->
+  <div id="customAlert" class="custom-alert">
+    <div class="alert-content">
+      <span class="alert-message"></span>
+      <button class="alert-close">×</button>
+    </div>
+  </div>
+
+  <!-- Hauptbereich -->
+  <div class="overlay">
+
+    <!-- Linke Seite -->
+    <div class="left-section">
+      <img src="../material/pink1.jpg" alt="Hintergrundbild" class="background-img" />
+      <div class="container">
+        <h1>Every cocktail has a story – find yours.</h1>
+        <p class="subtitle">Search by name or ingredient.</p>
+
+        <section id="searchSection">
+          <label for="searchType">search by:</label><br />
+          <select id="searchType">
+            <option value="ingredient">Ingredient</option>
+            <option value="name">Cocktailname</option>
+          </select>
+          <input type="text" id="input" placeholder="Search for ingredients..." />
+          <div id="errorMessage" class="error-message"></div>
+        </section>
+
+        <section id="randomSection">
+          <p class="or-text"><strong>Suprise Me!</strong></p>
+          <button id="randomButton">Random Cocktail</button>
+        </section>
+      </div>
+    </div>
+
+    <!-- Rechte Seite -->
+    <div class="right-section">
+      <img src="../material/pink.jpg" alt="Cocktailglas" />
+    </div>
+  </div>
+
+  <!-- Ergebnisse -->
+  <section id="resultsSection">
+    <ul id="cocktailList"></ul>
+  </section>
+
+  <!-- Script -->
+  <script src="script2.js"></script>
+</body>
+</html>
