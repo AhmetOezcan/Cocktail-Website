@@ -359,11 +359,10 @@ randomCocktailButton.addEventListener("click", async () => {
 document.addEventListener("DOMContentLoaded", function() {
     const sidebarToggle = document.getElementById('sidebarToggle');
     const sidebar = document.getElementById('sidebar');
-    const overlay = document.createElement('div');
-    overlay.className = 'sidebar-overlay';
-    document.body.appendChild(overlay);
+    // Overlay existiert jetzt im HTML, daher:
+    const overlay = document.querySelector('.sidebar-overlay');
 
-    if (sidebarToggle && sidebar) {  // Überprüfung ob Elemente existieren
+    if (sidebarToggle && sidebar && overlay) {
         sidebarToggle.addEventListener('click', () => {
             sidebar.classList.toggle('active');
             overlay.classList.toggle('active');
@@ -426,55 +425,11 @@ applyFilters.addEventListener("click", () => {
     } else {
         displayNoCocktailsFound();
     }
-});
 
-applyFilters.addEventListener("click", () => {
-    const selectedAlcoholContent = document.getElementById("alcoholFilter").value;
-    const selectedCategory = document.getElementById("categoryFilter").value;
-    const selectedGlass = document.getElementById("glassFilter").value;
-
-    let filteredCocktails = currentCocktails;
-
-    if (selectedAlcoholContent && selectedAlcoholContent !== "All") {
-        filteredCocktails = filteredCocktails.filter(
-            cocktail => cocktail.strAlcoholic === selectedAlcoholContent
-        );
-    }
-    if (selectedCategory && selectedCategory !== "All") {
-        filteredCocktails = filteredCocktails.filter(
-            cocktail => cocktail.strCategory === selectedCategory
-        );
-    }
-    if (selectedGlass && selectedGlass !== "All") {
-        filteredCocktails = filteredCocktails.filter(
-            cocktail => cocktail.strGlass === selectedGlass
-        );
-    }
-
-    if (filteredCocktails.length > 0) {
-        checkForDuplicatesAndDisplay(filteredCocktails);
-    } else {
-        displayNoCocktailsFound();
-    }
-
-    displayCocktails(filteredCocktails);
-
-    // Sidebar und Overlay entfernen
+    // Sidebar und Overlay schließen
     const sidebar = document.getElementById('sidebar');
     const overlay = document.querySelector('.sidebar-overlay');
     if (sidebar && overlay) {
-        sidebar.classList.remove('active');
-        overlay.classList.remove('active');
-    }
-});
-
-// Event-Listener für das Overlay, um die Sidebar zu schließen
-document.addEventListener("click", (event) => {
-    const sidebar = document.getElementById('sidebar');
-    const overlay = document.querySelector('.sidebar-overlay');
-    
-    // Schließe die Sidebar, wenn das Overlay oder ein Bereich außerhalb der Sidebar angeklickt wird
-    if (event.target === overlay || !sidebar.contains(event.target)) {
         sidebar.classList.remove('active');
         overlay.classList.remove('active');
     }
