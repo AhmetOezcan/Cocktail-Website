@@ -428,168 +428,7 @@ input[type="text"] {
 }
 
 /* Responsive */
-@media (max-width: 768px) {
-  .main-header {
-    padding: 10px 0;
-  }
-  
-  .header-content h1 {
-    font-size: 24px;
-  }
-  
-  .overlay {
-    flex-direction: column;
-    height: 100vh;
-    margin-top: 0;
-  }
-
-  .left-section {
-    flex: 1;
-    width: 100%;
-    height: 100vh;
-    padding: 20px;
-    padding-top: 80px;
-    margin-top: 0;
-  }
-
-  .right-section {
-    display: none;
-  }
-
-  .container {
-    padding: 0 15px;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-
-  .left-section h1 {
-    font-size: 32px;
-    text-align: center;
-  }
-
-  .subtitle {
-    text-align: center;
-    font-size: 16px;
-  }
-
-  #searchSection {
-    width: 100%;
-    max-width: 400px;
-    margin: 0 auto;
-  }
-
-  #searchSection select,
-  #searchSection input[type="text"] {
-    font-size: 14px;
-    padding: 10px;
-  }
-
-  #resultsSection {
-    display: none; /* Initially hidden on mobile */
-    position: fixed;
-    top: 60px; /* Reduced from 70px to match header height */
-    left: 0;
-    width: 100%;
-    height: calc(100vh - 60px); /* Adjusted to match new top value */
-    overflow-y: auto;
-    padding: 15px;
-    z-index: 100;
-    margin-top: 0; /* Remove any margin */
-  }
-
-  #resultsSection.active {
-    display: block;
-  }
-
-  #resultsSection.active ~ .left-section {
-    display: none;
-  }
-
-  #cocktailList {
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    gap: 15px;
-    padding: 10px;
-  }
-
-  .cocktail-image {
-    height: 150px;
-  }
-
-  .cocktail-name {
-    font-size: 16px;
-  }
-
-  .cocktail-category {
-    font-size: 12px;
-  }
-
-  .sidebar {
-    width: 100%;
-    right: -100%;
-  }
-
-  .sidebar.active {
-    right: 0;
-  }
-
-  .sidebar-content {
-    padding: 60px 20px 20px;
-  }
-
-  .custom-alert {
-    width: 90%;
-    left: 5%;
-    right: 5%;
-  }
-}
-
-/* Small mobile devices */
-@media (max-width: 480px) {
-  .left-section h1 {
-    font-size: 28px;
-  }
-
-  .subtitle {
-    font-size: 14px;
-  }
-
-  #cocktailList {
-    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-    gap: 10px;
-  }
-
-  .cocktail-image {
-    height: 130px;
-  }
-
-  .highlight-cocktail::before {
-    font-size: 0.7em;
-    padding: 3px 8px;
-  }
-
-  .recipe-header h1 {
-    font-size: 1.8em;
-  }
-
-  .recipe-meta span {
-    font-size: 0.8em;
-    padding: 6px 12px;
-  }
-}
-
-/* Remove landscape mode specific styles since we're hiding the right section */
-@media (max-height: 500px) and (orientation: landscape) {
-  .overlay {
-    flex-direction: column;
-  }
-
-  .left-section {
-    height: 100vh;
-    padding-top: 60px;
-  }
-}
+/* Removed all media queries for mobile devices */
 
 /* Error Message Styles */
 .error-message {
@@ -742,22 +581,6 @@ input[type="text"] {
   background-color: #ff8a8d;
 }
 
-@media (max-width: 768px) {
-  .recipe-content {
-    grid-template-columns: 1fr;
-  }
-  
-  .recipe-meta {
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-  }
-
-  .recipe-header h1 {
-    font-size: 2em;
-  }
-}
-
 /* Loading Screen Styles */
 .loading-screen {
     position: fixed;
@@ -874,4 +697,11 @@ input[type="text"] {
         transform: translateX(100%);
         opacity: 0;
     }
+}
+
+/* Rechte Hälfte auf Mobilgeräten ausblenden */
+@media (max-width: 768px) {
+  .right-section {
+    display: none !important;
+  }
 }
