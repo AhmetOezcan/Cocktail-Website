@@ -425,4 +425,3 @@ applyFilters.addEventListener("click", () => {
         displayNoCocktailsFound();
     }
 });
-
