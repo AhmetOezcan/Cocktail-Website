@@ -192,36 +192,22 @@ function checkForDuplicatesAndDisplay(allCocktails) {
 // Funktion, die die Cocktails auf der Webseite anzeigt
 function displayCocktails(cocktails) {
     const cocktailList = document.getElementById("cocktailList");
-    const resultsSection = document.getElementById("resultsSection");
     cocktailList.innerHTML = ""; // Liste leeren
 
-    // Add active class to results section
-    resultsSection.classList.add("active");
-
-    // Aktuelle Ergebnisse im SessionStorage speichern
-    sessionStorage.setItem('lastSearchResults', JSON.stringify(cocktails));
-
-    // Sortiere Cocktails: Perfect Matches zuerst
+    // Sort cocktails - perfect matches first
     cocktails.sort((a, b) => {
         if (a.containsAllIngredients && !b.containsAllIngredients) return -1;
         if (!a.containsAllIngredients && b.containsAllIngredients) return 1;
         return 0;
     });
 
-    // Zähle wie viele Cocktails alle Zutaten enthalten
-    const perfectMatchCount = cocktails.filter(cocktail => cocktail.containsAllIngredients).length;
-    
-    // Hole die aktuelle Anzahl der Zutaten aus dem Search Input
-    const searchInput = document.getElementById("input");
-    const ingredientCount = searchInput.value.split(',').filter(i => i.trim().length > 0).length;
-
     cocktails.forEach(cocktail => {
         // Neues Listenelement für jeden Cocktail erstellen
         const listItem = document.createElement("li");
 
-        // HERVORHEBUNG nur wenn mindestens 2 Cocktails alle Zutaten enthalten UND mindestens 2 Zutaten gesucht wurden
-        if (cocktail.containsAllIngredients && perfectMatchCount >= 2 && ingredientCount >= 2) {
-            listItem.classList.add("highlight-cocktail");
+        // HERVORHEBUNG, wenn alle Zutaten enthalten sind
+         if (cocktail.containsAllIngredients) {
+              listItem.classList.add("highlight-cocktail");
         }
         
         // Bild-Container erstellen
@@ -249,7 +235,7 @@ function displayCocktails(cocktails) {
         // Link zum Cocktail
         const cocktailLink = document.createElement("a");
         cocktailLink.href = `recipe.html?id=${cocktail.idDrink}`;
-        cocktailLink.target = "_blank";
+        cocktailLink.target = "_blank"; // Öffnen im neuen Tab
         
         // Elemente zusammenfügen
         infoContainer.appendChild(nameElement);
@@ -275,8 +261,7 @@ function matchIngredients(cocktails, ingredients) {
 
 function displayNoCocktailsFound() {
     const cocktailList = document.getElementById("cocktailList");
-    cocktailList.innerHTML = "";
-    showAlert("No cocktails found! Please try different search criteria.");
+    cocktailList.innerHTML = "No Cocktails available!";
 }
 
 
@@ -296,21 +281,21 @@ function handleSearchEvents(event){
         }
     }
     // wenn der Event vom Typ "keydown" ist und die Taste "Enter" gedrückt wurde, 
-    // dann die Suche starten und Sidebar öffnen
+    // dann die Suche starten
     else if(event.type === "keydown" && event.key === "Enter"){
+        // Sidebar automatisch öffnen
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.querySelector('.sidebar-overlay');
+        if (sidebar && overlay) {
+            sidebar.classList.add('active');
+            overlay.classList.add('active');
+        }
         if (searchTypeValue === "ingredient") {
             const ingredient = searchInput.value;
             searchCocktailsByIngredient(ingredient);
         } else if (searchTypeValue === "name") {
             const name = searchInput.value;
             searchCocktailsByName(name);
-        }
-        // Sidebar öffnen
-        const sidebar = document.getElementById('sidebar');
-        const overlay = document.querySelector('.sidebar-overlay');
-        if (sidebar && overlay) {
-            sidebar.classList.add('active');
-            overlay.classList.add('active');
         }
     }	
 }
@@ -331,7 +316,20 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     noButton.addEventListener("click", function() {
-        document.body.innerHTML = "<h1 style='text-align:center; margin-top: 100px;'>🚫 Access denied!</h1>";
+        document.body.innerHTML = `
+            <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100vh;background:#f8f8f8;">
+                <img src="https://cdn.pixabay.com/photo/2016/03/31/19/56/drink-1298381_1280.png" alt="" style="max-width:180px;margin-bottom:30px;opacity:0.8;">
+                <h1 style="color:#c0392b;margin-bottom:10px;">No Access!</h1>
+                <p style="font-size:1.2em;color:#555;margin-bottom:30px;text-align:center;max-width:350px;">
+                    Unfortunately, you are not yet 18 years old.<br>
+                    Access to this site is therefore not permitted.<br>
+                    Enjoy delicious cocktails once you are of legal age!
+                </p>
+                <button onclick="window.location.href='https://www.kindersache.de/bereiche/spiel-und-spass/rezepte'" style="padding:12px 28px;font-size:1em;background:#27ae60;color:#fff;border:none;border-radius:6px;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,0.08);">
+                    To Non-Alcoholic Cocktails
+                </button>
+            </div>
+        `;
     });
 });
 
@@ -359,10 +357,11 @@ randomCocktailButton.addEventListener("click", async () => {
 document.addEventListener("DOMContentLoaded", function() {
     const sidebarToggle = document.getElementById('sidebarToggle');
     const sidebar = document.getElementById('sidebar');
-    // Overlay existiert jetzt im HTML, daher:
-    const overlay = document.querySelector('.sidebar-overlay');
+    const overlay = document.createElement('div');
+    overlay.className = 'sidebar-overlay';
+    document.body.appendChild(overlay);
 
-    if (sidebarToggle && sidebar && overlay) {
+    if (sidebarToggle && sidebar) {  // Überprüfung ob Elemente existieren
         sidebarToggle.addEventListener('click', () => {
             sidebar.classList.toggle('active');
             overlay.classList.toggle('active');
@@ -377,27 +376,19 @@ document.addEventListener("DOMContentLoaded", function() {
 
 // Beim Laden der Website aufrufen
 document.addEventListener("DOMContentLoaded", function () {
-    // Prüfen ob wir von der Rezept-Seite zurückkommen
-    if (sessionStorage.getItem('fromRecipePage') === 'true') {
-        // Wenn ja, dann den vorherigen Zustand wiederherstellen
-        sessionStorage.removeItem('fromRecipePage');
-        if (sessionStorage.getItem('lastSearchResults')) {
-            const lastResults = JSON.parse(sessionStorage.getItem('lastSearchResults'));
-            displayCocktails(lastResults);
-        }
-    } else {
-        // Wenn nicht, dann normal laden
-        loadCocktailsByAlphabet();
-        // Remove active class from results section
-        const resultsSection = document.getElementById("resultsSection");
-        resultsSection.classList.remove("active");
-    }
+    loadCocktailsByAlphabet();
 });
 
 
 const applyFilters = document.getElementById("applyFilters");
 
 applyFilters.addEventListener("click", () => {
+    // Prüfen, ob bereits eine Suche durchgeführt wurde
+    if (!currentCocktails || currentCocktails.length === 0) {
+        showAlert("First search for a cocktail");
+        return;
+    }
+
     const selectedAlcoholContent = document.getElementById("alcoholFilter").value;
     const selectedCategory = document.getElementById("categoryFilter").value;
     const selectedGlass = document.getElementById("glassFilter").value;
@@ -420,17 +411,17 @@ applyFilters.addEventListener("click", () => {
         );
     }
 
-    if (filteredCocktails.length > 0) {
-        checkForDuplicatesAndDisplay(filteredCocktails);
-    } else {
-        displayNoCocktailsFound();
-    }
-
-    // Sidebar und Overlay schließen
+    // Sidebar schließen
     const sidebar = document.getElementById('sidebar');
     const overlay = document.querySelector('.sidebar-overlay');
     if (sidebar && overlay) {
         sidebar.classList.remove('active');
         overlay.classList.remove('active');
+    }
+
+    if (filteredCocktails.length > 0) {
+        checkForDuplicatesAndDisplay(filteredCocktails);
+    } else {
+        displayNoCocktailsFound();
     }
 });
