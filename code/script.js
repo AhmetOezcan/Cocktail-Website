@@ -234,7 +234,7 @@ function displayCocktails(cocktails) {
         
         // Link zum Cocktail
         const cocktailLink = document.createElement("a");
-        cocktailLink.href = `recipe.html?id=${cocktail.idDrink}`;
+        cocktailLink.href = `./code/recipe.html?id=${cocktail.idDrink}`;
         cocktailLink.target = "_blank"; // Öffnen im neuen Tab
         
         // Elemente zusammenfügen

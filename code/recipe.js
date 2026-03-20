@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     const cocktailId = urlParams.get('id');
 
     if (!cocktailId) {
-        window.location.href = 'index.html';
+        window.location.href = '../index.html';
         return;
     }
 
@@ -38,10 +38,10 @@ document.addEventListener('DOMContentLoaded', async function() {
                 }
             }
         } else {
-            window.location.href = 'index.html';
+            window.location.href = '../index.html';
         }
     } catch (error) {
         console.error('Error fetching cocktail details:', error);
-        window.location.href = 'index.html';
+        window.location.href = '../index.html';
     }
 });
