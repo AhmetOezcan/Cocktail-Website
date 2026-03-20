@@ -234,11 +234,7 @@ function displayCocktails(cocktails) {
         
         // Link zum Cocktail
         const cocktailLink = document.createElement("a");
-<<<<<<< HEAD:code/script.js
         cocktailLink.href = `./code/recipe.html?id=${cocktail.idDrink}`;
-=======
-        cocktailLink.href = `recipe.html?id=${cocktail.idDrink}`;
->>>>>>> 6bed2b6e56bb32a77d6a3505acef8dbe2f06ba73:script2.js
         cocktailLink.target = "_blank"; // Öffnen im neuen Tab
         
         // Elemente zusammenfügen
@@ -428,8 +424,4 @@ applyFilters.addEventListener("click", () => {
     } else {
         displayNoCocktailsFound();
     }
-<<<<<<< HEAD:code/script.js
 });
-=======
-});
->>>>>>> 6bed2b6e56bb32a77d6a3505acef8dbe2f06ba73:script2.js
