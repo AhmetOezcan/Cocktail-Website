@@ -1,1 +1,44 @@
 # Cocktail-Website
+
+# CocktailCraft
+
+A modern web application to discover cocktails based on ingredients or name.
+
+CocktailCraft allows users to quickly find drink recipes, explore new combinations, and get inspired – all in a clean and interactive interface.
+
+---
+
+## Features
+
+- Search cocktails by name  
+- Search by ingredients  
+- Autocomplete suggestions  
+- Random cocktail generator  
+- Responsive design  
+
+---
+
+## Tech Stack
+
+- HTML  
+- CSS  
+- JavaScript  
+
+---
+
+## Preview
+
+
+---
+
+## ▶️ Live Demo
+
+👉 *(add your link here)*
+
+---
+
+## ⚙️ Setup
+
+```bash
+git clone https://github.com/your-username/cocktailcraft.git
+cd cocktailcraft
