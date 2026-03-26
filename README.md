@@ -2,6 +2,8 @@
 
 # CocktailCraft
 
+My first Projekt!
+
 A modern web application to discover cocktails based on ingredients or name.
 
 CocktailCraft allows users to quickly find drink recipes, explore new combinations, and get inspired – all in a clean and interactive interface.
