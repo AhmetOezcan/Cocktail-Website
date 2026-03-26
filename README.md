@@ -26,19 +26,7 @@ CocktailCraft allows users to quickly find drink recipes, explore new combinatio
 
 ---
 
-## Preview
-
-
----
 
 ## ▶️ Live Demo
 
-👉 *(add your link here)*
-
----
-
-## ⚙️ Setup
-
-```bash
-git clone https://github.com/your-username/cocktailcraft.git
-cd cocktailcraft
+https://ahmetoezcan.github.io/Cocktail-Website/index.html
